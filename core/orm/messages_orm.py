@@ -4,7 +4,7 @@ from sqlalchemy.exc import SQLAlchemyError
 from core.orm.base_orm import BaseOrm
 from core.database import async_session_maker
 from core.logs.logs import logger_error
-from core.models.image_models import Image
+
 from core.models.messages_models import Messages
 from core.models.users_models import Users
 
@@ -31,14 +31,11 @@ class MessagesOrm(BaseOrm):
                         cls.model.id.label("message_id"),
                         cls.model.message,
                         cls.model.time_send,
-                        Image.image_path.label("user_avatar"),
                         Users.id.label("user_id"),
                         Users.name,
-                        Users.role,
                     )
                     .select_from(cls.model)
                     .join(Users, cls.model.user_id == Users.id, isouter=True)
-                    .join(Image, cls.model.user_id == Image.user_id, isouter=True)
                     .order_by(desc(cls.model.id))
                     .limit(50)
                 )

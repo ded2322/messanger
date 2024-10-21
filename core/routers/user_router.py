@@ -26,8 +26,6 @@ async def login_user(response: Response, data_user: UserDataLoginSchema):
     return await AuthService.login_user(response,data_user)
 
 
-#
-
 @router_user.get("/all", status_code=200, summary="Show all users")
 async def all_user():
     """Возвращает всех пользователей"""

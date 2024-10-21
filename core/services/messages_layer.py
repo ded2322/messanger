@@ -74,7 +74,7 @@ class MessageLayer:
             await MessagesOrm.delete_data(id=message.id_message)
             # отправка event на удаление сообщения
             event_data = {"message_id": message.id_message}
-            await cls.send_event("delete", **event_data)
+            #await cls.send_event("delete", **event_data)
 
             return {"message": "message deleted successfully"}
         except Exception as e:

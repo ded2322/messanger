@@ -1,7 +1,7 @@
 from core.utils.auth import DecodeJWT,get_password_hash
 from core.orm.user_orm import UserOrm
 from core.schemas.users_schemas import JWTTokenSchema, UserUpdateDataSchema
-from core.utils.validator import UserValidator, AuthCheck
+from core.utils.user_validator import UserValidator, AuthCheck
 
 
 class UserService:

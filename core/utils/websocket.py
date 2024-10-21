@@ -1,39 +1,34 @@
-from contextlib import asynccontextmanager
-from typing import List
-
 from fastapi import WebSocket
 
+from core.logs.logs import logger_websocket
 
 class WebSocketManager:
     def __init__(self):
-        self.active_connections: List[WebSocket] = []
+        self.active_connections: dict[int, WebSocket] = {}
 
-    async def connect(self, websocket: WebSocket):
+    async def connect(self, websocket: WebSocket, user_id: int):
+        """Добавляем соединение для конкретного пользователя."""
         await websocket.accept()
-        self.active_connections.append(websocket)
+        self.active_connections[user_id] = websocket
 
-    def disconnect(self, websocket: WebSocket):
-        self.active_connections.remove(websocket)
+    def disconnect(self, user_id: int):
+        """Удаляем соединение, если пользователь отключился."""
+        if user_id in self.active_connections:
+            del self.active_connections[user_id]
 
-    async def send_personal_message(self, message: str, websocket: WebSocket):
-        await websocket.send_text(message)
+    async def send_personal_message(self, message: str, user_id: int):
+        """Отправляем сообщение конкретному пользователю."""
+        websocket = self.active_connections.get(user_id)
+        if websocket and websocket.client_state.name == "CONNECTED":
+            await websocket.send_text(message)
+        else:
+            logger_websocket.warning(f"User {user_id} not connected")
 
-    async def broadcast(self, message: str, websocket: WebSocket):
-        for connection in self.active_connections:
-            if connection != websocket:
-                await connection.send_text(message)
-
-    async def broadcast_event(self, message: str):
-        for connection in self.active_connections:
-            await connection.send_text(message)
-
-    @asynccontextmanager
-    async def manage_connection(self, websocket: WebSocket):
-        try:
-            await self.connect(websocket)
-            yield
-        finally:
-            self.disconnect(websocket)
+    async def close_connection(self, user_id: int):
+        """Закрываем соединение пользователя."""
+        websocket = self.active_connections.get(user_id)
+        if websocket:
+            await websocket.close()
 
 
 manager = WebSocketManager()

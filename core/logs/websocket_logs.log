@@ -1,0 +1,21 @@
+2024-10-21 11:23:37,636 - INFO - User 2 connected
+2024-10-21 11:23:37,703 - ERROR - Error in create_connect: Could not locate column in row for column 'role'
+2024-10-21 11:24:16,366 - INFO - User 2 connected
+2024-10-21 11:24:16,430 - WARNING - User 3 not connected
+2024-10-21 11:24:29,488 - INFO - User 3 connected
+2024-10-21 11:26:25,432 - INFO - User 4 connected
+2024-10-21 11:26:50,990 - INFO - User 3 disconnected
+2024-10-21 11:26:55,062 - INFO - User 3 connected
+2024-10-21 11:27:09,645 - INFO - User 2 disconnected
+2024-10-21 11:27:14,036 - INFO - User 2 connected
+2024-10-21 11:28:03,309 - INFO - User 3 disconnected
+2024-10-21 11:28:03,312 - INFO - User 2 disconnected
+2024-10-21 11:28:03,312 - INFO - User 4 disconnected
+2024-10-21 11:28:17,451 - INFO - User 2 connected
+2024-10-21 11:28:17,508 - WARNING - User 3 not connected
+2024-10-21 11:28:29,394 - INFO - User 3 connected
+2024-10-21 11:28:29,399 - WARNING - User 4 not connected
+2024-10-21 11:28:36,269 - INFO - User 2 disconnected
+2024-10-21 11:28:43,218 - INFO - User 2 connected
+2024-10-21 11:29:37,459 - INFO - User 3 disconnected
+2024-10-21 11:29:43,070 - INFO - User 2 disconnected

@@ -12,7 +12,7 @@ class Users(Base):
     password: Mapped[str] = mapped_column(String(length=200), nullable=False)
 
 
-    #message = relationship("Messages", back_populates="user")
+    message = relationship("Messages", back_populates="user")
 
     def __str__(self):
         return f"Name: {self.name}"

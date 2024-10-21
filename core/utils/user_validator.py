@@ -12,9 +12,7 @@ class AuthCheck:
 
     @classmethod
     async def get_user_info(cls, **kwargs) -> dict :
-        """
-        Возвращает информацию о пользователе по заданным критериям
-        """
+        """Возвращает информацию о пользователе по заданным критериям"""
         user_data = await UserOrm.found_one_or_none(**kwargs)
         if not user_data:
             raise HTTPException(status_code=404, detail="User not found")

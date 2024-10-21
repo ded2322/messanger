@@ -4,16 +4,18 @@ from fastapi import FastAPI, Request
 
 from core.routers.user_router import router_auth
 from core.routers.user_router import  router_user
+from core.routers.wb_router import router as websocket_router
 from core.routers.message_router import router as message_router
-from core.routers.wb_router import router as web_socket_router
+
 
 
 app = FastAPI(title="Real-time chat", version="1")
 
 app.include_router(router_auth)
 app.include_router(router_user)
-# app.include_router(message_router)
-# app.include_router(web_socket_router)
+app.include_router(websocket_router)
+app.include_router(message_router)
+
 #
 # origins = ["localhost"]
 #
